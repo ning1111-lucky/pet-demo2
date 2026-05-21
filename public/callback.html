@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Authenticating...</title>
+</head>
+<body>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const state = urlParams.get('state');
+    const error = urlParams.get('error');
+    
+    if (window.opener) {
+      if (error) {
+        window.opener.postMessage({ type: 'SPOTIFY_AUTH_ERROR', error }, '*');
+      } else if (code) {
+        window.opener.postMessage({ type: 'SPOTIFY_AUTH_SUCCESS', code, state }, '*');
+      }
+      window.close();
+    } else {
+      let redirectUrl = '/?';
+      if (error) redirectUrl += 'error=' + encodeURIComponent(error);
+      else if (code) redirectUrl += 'code=' + encodeURIComponent(code);
+      if (state) redirectUrl += '&state=' + encodeURIComponent(state);
+      window.location.href = redirectUrl;
+    }
+  </script>
+  <p style="font-family: monospace; text-align: center; margin-top: 50px;">Authenticating... Please wait.</p>
+</body>
+</html>
