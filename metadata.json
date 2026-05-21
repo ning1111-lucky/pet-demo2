@@ -1,8 +1,0 @@
-{
-  "name": "像素風格音樂寵物孵化器",
-  "description": "設計研究專用的音樂風格寵物孵化互動原型，使用像素風格呈現。",
-  "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
-}
